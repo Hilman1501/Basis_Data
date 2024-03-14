@@ -1,0 +1,149 @@
+Microsoft Windows [Version 10.0.22631.3296]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\hilih>cd \xampp0\mysql\bin
+
+C:\xampp0\mysql\bin>mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 10
+Server version: 10.4.28-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use t105
+ERROR 1049 (42000): Unknown database 't105'
+MariaDB [(none)]> USE ti05
+Database changed
+MariaDB [ti05]> show tables;
++----------------+
+| Tables_in_ti05 |
++----------------+
+| jabatan        |
+| pegawai        |
++----------------+
+2 rows in set (0.002 sec)
+
+MariaDB [ti05]> INSERT INTO jabatan VALUES
+    -> ('','Manager'),
+    -> ('','Direktur'),
+    -> ('','Staff');
+Query OK, 3 rows affected, 3 warnings (0.027 sec)
+Records: 3  Duplicates: 0  Warnings: 3
+
+MariaDB [ti05]> SELECT * FROM jabatan;
++----+----------+
+| id | nama     |
++----+----------+
+|  2 | Direktur |
+|  1 | Manager  |
+|  3 | Staff    |
++----+----------+
+3 rows in set (0.002 sec)
+
+MariaDB [ti05]>
+MariaDB [ti05]> INSERT INTO jabatan VALUES
+    -> ('','Supervisor');
+Query OK, 1 row affected, 1 warning (0.005 sec)
+MariaDB [ti05]> SELECT * FROM jabatan;
++----+------------+
+| id | nama       |
++----+------------+
+|  2 | Direktur   |
+|  1 | Manager    |
+|  3 | Staff      |
+|  4 | Supervisor |
++----+------------+
+4 rows in set (0.001 sec)
+
+MariaDB [ti05]> INSERT INTO pegawai
+    -> (nip, nama, email, jabatan_id)
+    -> VALUES
+    -> ('2001','Hilman','hilihilman@gmail.com',1);
+Query OK, 1 row affected (0.013 sec)
+
+MariaDB [ti05]> SELECT * FROM pegawai;
++----+------+--------+----------------------+------------+
+| id | nip  | nama   | email                | jabatan_id |
++----+------+--------+----------------------+------------+
+|  1 | 2001 | Hilman | hilihilman@gmail.com |          1 |
++----+------+--------+----------------------+------------+
+1 row in set (0.001 sec)
+
+MariaDB [ti05]> SELECT * FROM jabatan;
++----+------------+
+| id | nama       |
++----+------------+
+|  2 | Direktur   |
+|  1 | Manager    |
+|  3 | Staff      |
+|  4 | Supervisor |
++----+------------+
+4 rows in set (0.001 sec)
+
+MariaDB [ti05]> UPDATE jabatan SET nama = 'kepala gudang'
+    -> WHERE id = 4;
+Query OK, 1 row affected (0.011 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [ti05]> SELECT * FROM  jabatan;
++----+---------------+
+| id | nama          |
++----+---------------+
+|  2 | Direktur      |
+|  4 | kepala gudang |
+|  1 | Manager       |
+|  3 | Staff         |
++----+---------------+
+4 rows in set (0.001 sec)
+
+MariaDB [ti05]> UPDATE pegawai SET nama ='Brigo'
+    -> WHERE id = 1;
+Query OK, 1 row affected (0.030 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [ti05]> SELECT * FROM pegawai;
++----+------+-------+----------------------+------------+
+| id | nip  | nama  | email                | jabatan_id |
++----+------+-------+----------------------+------------+
+|  1 | 2001 | Brigo | hilihilman@gmail.com |          1 |
++----+------+-------+----------------------+------------+
+1 row in set (0.001 sec)
+
+MariaDB [ti05]> DELETE FROM jabatan WHERE id = 4;
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [ti05]> SELECT * FROM pegawai;
++----+------+-------+----------------------+------------+
+| id | nip  | nama  | email                | jabatan_id |
++----+------+-------+----------------------+------------+
+|  1 | 2001 | Brigo | hilihilman@gmail.com |          1 |
++----+------+-------+----------------------+------------+
+1 row in set (0.001 sec)
+
+MariaDB [ti05]> INSERT INTO pegawai
+    -> (nip, nama, email, jabatan_id
+    -> VALUES
+    -> ('2002','bagong','brigo@gmail.com',2);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'VALUES
+('2002','bagong','brigo@gmail.com',2)' at line 4
+MariaDB [ti05]>  INSERT INTO pegawai
+    ->  (nip, nama, email, jabatan_id)
+    -> VALUES
+    -> ('2002','bagong','brigo@gmail.com',2);
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [ti05]> SELECT * FORM pegawai;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'FORM pegawai' at line 1
+MariaDB [ti05]> SELECT * FROM pegawai;
++----+------+--------+----------------------+------------+
+| id | nip  | nama   | email                | jabatan_id |
++----+------+--------+----------------------+------------+
+|  1 | 2001 | Brigo  | hilihilman@gmail.com |          1 |
+|  2 | 2002 | bagong | brigo@gmail.com      |          2 |
++----+------+--------+----------------------+------------+
+2 rows in set (0.001 sec)
+
+MariaDB [ti05]>
